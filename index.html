@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Замовляй скількі за хочеш</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffd700, #ff8c00, #ff6347);
+            color: #333333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #orderSection {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        h1 {
+            color: #333333;
+        }
+
+        input, select, button {
+            margin-bottom: 15px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff8c00;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <div id="orderSection">
+        <h1>Замовляй скількі за хочеш</h1>
+        <label for="name">Ім'я:</label>
+        <input type="text" id="name" placeholder="Введіть ваше ім'я"><br><br>
+        
+        <label for="email">Електронна пошта:</label>
+        <input type="email" id="email" placeholder="Введіть вашу електронну пошту"><br><br>
+        
+        <label for="phone">Телефон:</label>
+        <input type="text" id="phone" placeholder="Введіть ваш номер телефону"><br><br>
+        
+        <label for="address">Адреса:</label>
+        <input type="text" id="address" placeholder="Введіть вашу адресу"><br><br>
+        
+        <label for="orderCode">Меню:</label>
+        <select id="orderCode">
+            <option value="1" data-price="70000">Суші - 1499 грн</option>
+            <option value="2" data-price="3000">Морозиво - 45 грн</option>
+            <option value="3" data-price="40000">Картопля фрі - 70 грн</option>
+            <option value="4" data-price="70000">Піца - 155 грн</option>
+        </select><br><br>
+        
+        <button onclick="placeOrder()">Замовити</button>
+    </div>
+
+    <div id="orderStatus" style="display: none;">
+        <h1>Якщо ви не їдете по їжу то їже їде до вас!</h1>
+        <p>Смачного</p>
+    </div>
+
+    <script>
+        function placeOrder() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const orderCode = document.getElementById('orderCode').value;
+            const orderOption = document.getElementById('orderCode').options[document.getElementById('orderCode').selectedIndex];
+            const orderTitle = orderOption.text;
+            const orderPrice = parseInt(orderOption.getAttribute('data-price'));
+
+            if (!name || !email || !phone || !address || !orderCode) {
+                alert('Будь ласка, заповніть всі поля форми.');
+                return;
+            }
+
+            document.getElementById('orderSection').style.display = 'none';
+            document.getElementById('orderStatus').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
